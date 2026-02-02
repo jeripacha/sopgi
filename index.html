@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MESAS PACHA</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@700&family=Raleway:wght@600&family=Press+Start+2P&family=Walter+Turncoat&family=Lobster&family=Poppins:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+    <a href="#" class="close-btn">&times;</a> <h3 class="menu-title">Menú</h3>
+
+        <a href="#" id="mostrar-resumen"><i class="fas fa-calculator"></i> Cuentas</a>
+
+        <a href="#area-lounge"><i class="fas fa-chart-pie"></i> Porcentajes</a>
+
+        <a href="#area-cholet"><i class="fas fa-clipboard-list"></i> Inventarios</a>
+
+
+        <a href="#" id="btn-reportes">
+            <i class="fas fa-file-invoice"></i> Reportes
+        </a>
+        </div>
+    <!-- Nuevo contenedor para header + imagen -->
+    <div class="custom-header-container">
+        <header class="custom-header">
+            <img class="menu-icon" id="menu-icon"
+                src="https://img.icons8.com/?size=100&id=eo4RH9bVDxml&format=png&color=000000" alt="Menu">
+        </header>
+        <img src="Gemini_Generated_Image_e6kr6be6kr6be6kr-removebg-preview.png" class="top-image" alt="Imagen encima">
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <main>
+        <div class="contenido">
+
+            <div class="areas-container">
+
+                <section class="area-section" data-cantidad="10" id="area-pacha">
+                    <h2>Área Pacha</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_7k67v57k67v57k67.png" alt="Pacha">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="11" id="area-lounge">
+                    <h2>Área Lounge</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_m9zfqbm9zfqbm9zf.png" alt="Lounge">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="12" id="area-cholet">
+                    <h2>Área Cholet</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Cholet">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="18" id="area-parrales">
+                    <h2>Área Parrales</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_bpjjk3bpjjk3bpjj.png" alt="Parrales">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="6" id="area-vip">
+                    <h2>Área VIP</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="VIP">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="10" id="area-extra">
+                    <h2>Área Extra</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Extra">
+                    </div>
+                    <div class="area-divider"></div>
+                </section>
+
+                <section class="area-section" data-cantidad="3" id="area-camel">
+                    <h2>Área Camel</h2>
+                    <div class="image-grid">
+                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Camel">
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+    </main>
+    <!-- MODAL REPORTES -->
+    <div id="modal-reportes" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="contenido-reportes"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
