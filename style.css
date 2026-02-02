@@ -1,0 +1,1633 @@
+/* ===== ESTILOS GENERALES Y ESTRUCTURA (SIN CAMBIOS) ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at center, #2b2b2b 0%, #000000 100%);
+    color: #fff;
+}
+
+/* Contenedor relativo para posicionar la imagen */
+.custom-header-container {
+    position: relative;
+    height: 60px; /* altura más delgada para desktop */
+}
+
+/* Header fijo, distinto al original */
+.custom-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* header más delgado */
+    background-color: rgba(51, 59, 71, 0.8); /* azul semitransparente */
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: space-between;
+}
+
+/* Imagen encima del header */
+.top-image {
+    position: absolute;
+    top: -20px; /* sobresale menos con header más delgado */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px; /* más pequeña para celulares */
+    height: auto;
+    z-index: 30; /* encima del header */
+}
+
+/* Ícono del menú */
+.menu-icon {
+    width: 55px; /* más pequeño */
+    height: 55px;
+    cursor: pointer;
+    position: absolute; 
+    left: 15px;
+    top: 60%;
+    transform: translateY(-50%);
+}
+
+/* ===== Ajustes para pantallas pequeñas ===== */
+@media (max-width: 600px) {
+    .custom-header-container {
+        height: 50px;
+    }
+
+    .custom-header {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+    .top-image {
+        width: 100px;
+        top: -20px;
+    }
+
+    .menu-icon {
+        width: 45px;
+        height: 45px;
+        left: 10px;
+    }
+}
+
+
+/* ✅ Ajuste para el ícono */
+.menu-icon {
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    /* ✅ Nuevo: Mover el ícono a la izquierda (o donde se requiera) */
+    margin-right: auto; 
+    /* ✅ Nuevo: Ajustar su posición vertical si es necesario */
+    position: absolute; 
+    left: 20px; /* Distancia del borde izquierdo */
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+
+
+main { padding-top: 60px; }
+.contenido { padding: 20px; }
+
+/* ===== ESTILOS DE GRID (SIN CAMBIOS) ===== */
+.areas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.area-section {
+    margin-bottom: 50px;
+}
+.area-section h2 {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.image-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.image-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.img-wrapper {
+    position: relative;
+}
+.img-number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-family: 'Walter Turncoat', cursive;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1a1a1a, #333333);
+    border: 2px solid #303030;
+    padding: 3px 6px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.area-divider {
+    position: relative;
+    margin-top: 20px;
+    height: 3px;
+    background: #555;
+}
+
+.area-divider::before {
+    content: "";
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+}
+
+/* ==========================================================
+    ✅ RESPONSIVIDAD (Ajustes para el ícono de menú)
+    ========================================================== */
+
+/* Pantallas medianas */
+@media (max-width: 768px) {
+    header { height: 70px; padding: 0 15px; }
+    .top-image { width: 110px; top: -18px; }
+
+    /* ✅ Ajuste del tamaño del ícono */
+    .menu-icon { 
+        width: 60px; 
+        height: 60px; 
+        left: 15px; /* Ajustar posición lateral */
+    }
+
+    .areas-container { grid-template-columns: 1fr; gap: 25px; } 
+    .image-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; } 
+    main { padding-top: 140px; }
+}
+
+
+/* Pantallas pequeñas (celulares) */
+@media (max-width: 480px) {
+    header { height: 60px; padding: 0 10px; }
+    .top-image { width: 90px; top: -12px; }
+
+    /* ✅ Ajuste CLAVE para el ícono en móviles */
+    .menu-icon { 
+        width: 50px; 
+        height: 50px; 
+        left: 10px; /* Más cerca de la esquina */
+    }
+
+    .areas-container { grid-template-columns: 1fr; gap: 25px; }
+    .image-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 4px;
+    } 
+
+    main { padding-top: 20px; }
+
+    .img-number {
+        font-size: 0.7em;
+        padding: 1px 3px;
+        border: 1px solid #303030;
+        border-radius: 3px;
+    }
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px; /* Definimos el ancho visible fijo */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+
+    /* 🌟 CLAVE 1: TRASLADAR FUERA DE LA VISTA 🌟 */
+    transform: translateX(-100%); /* Desplaza el menú 100% de su ancho hacia la izquierda (oculto) */
+
+    /* 🌟 CLAVE 2: TRANSICIÓN PARA EL EFECTO DE DESLIZAMIENTO 🌟 */
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Transición con efecto elástico para entrada y salida */
+}
+
+/* Estilos BASE de los enlaces */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+
+    /* 1. Establecer la transición para el giro */
+    transition: 0.3s ease-in-out; 
+
+    /* 2. Establecer el punto de origen del giro (opcional, para que gire desde el centro) */
+    transform-origin: center left; /* Gira sobre el punto inicial izquierdo */
+}
+
+/* 🌟 EFECTO HOVER CON GIRO 🌟 */
+.sidebar a:hover {
+    color: #f1f1f1; /* Cambio de color más brillante */
+
+    /* Gira el texto 2 grados. Puedes cambiar el valor (ej: 5deg) */
+    transform: rotate(2deg) scale(1.05); /* Ligeramente rotado y agrandado */
+}
+/* Botón de cerrar (x) (Mantener) */
+.sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Título del menú (Mantener) */
+.sidebar .menu-title {
+    color: white;
+    padding: 8px 8px 20px 32px;
+     font-family: 'Walter Turncoat', cursive;
+    font-size: 25px;
+    border-bottom: 2px solid #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo para mostrar el sidebar */
+.sidebar.open {
+    /* 🌟 CLAVE 3: REGRESAR A LA POSICIÓN ORIGINAL 🌟 */
+    transform: translateX(0); /* Lo devuelve a su posición visible (0) */
+}
+/* Añade o modifica este bloque en tu archivo style.css */
+
+.sidebar a i {
+    /* Dar un margen derecho al ícono para separarlo del texto */
+    margin-right: 10px; 
+
+    /* 🌟 CLAVE: ASIGNAR UN COLOR VIBRANTE SOLO AL ÍCONO 🌟 */
+    color: #d2d7cc; /* Color cian vibrante. ¡Cámbialo al que más te guste! */
+
+    /* Aseguramos que el color del ícono no cambie en el hover (opcional) */
+    transition: none; 
+}
+
+
+
+/* Estilos para el overlay (el fondo oscuro) */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+    z-index: 999; 
+    /* Cambiamos display:none por opacity y visibility para que la transición funcione */
+    visibility: hidden; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s; /* La visibilidad cambia al terminar la opacidad */
+}
+
+#overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; /* Sin retraso al activarse */
+}
+
+/* Asegurar que el icono del menú sea visible y clicable (Mantener) */
+header {
+    z-index: 1001;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+/* --- Estilos base del Modal --- */
+.comprobante-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Oscuro para destacar el comprobante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+/* Nuevo CSS para el contenedor del cuerpo */
+.comprobante-body {
+    display: flex;
+    gap: 20px; /* Espacio entre los dos bloques de transacción */
+    flex-wrap: nowrap; /* Permite que los bloques se envuelvan en pantallas pequeñas */
+}
+.nota {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.comprobante-content {
+    background: radial-gradient(circle at center, #2b2b2b 0%, #000000 100%);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 750px;
+    width: 90%;
+    max-height: 75vh;
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif; /* Fuente limpia */
+}
+
+/* --- Estilos del Encabezado --- */
+.comprobante-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    border-bottom: 2px solid #4CAF50; /* Línea verde de confirmación */
+    padding-bottom: 15px;
+}
+
+.comprobante-header h2 {
+    color: #ffffff; /* Verde de éxito */
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.comprobante-header p {
+    color: #ebebeb;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+/* Botón de cerrar */
+.close-comprobante {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #ffffff;
+}
+.close-comprobante:hover {
+    color: #ff0000; /* cambiar color al pasar el mouse */
+}
+/* Cuando hay solo una transacción, el bloque será más estrecho */
+.single-transaction {
+    max-width: 420px;      /* Ajusta a tu gusto (350–450px recomendable) */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* --- Estilos del Cuerpo (Detalle de Transacciones) --- */
+.transaction-block {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    flex: 1 1 5%; /* Crece, se encoge, y base de 45% del ancho */
+        min-width: 300px; /* Asegura que no se hagan demasiado pequeños en dispositivos grandes */
+    }
+/* ✅ NUEVO ESTILO: Bloque de Consumo (Tragos/Combo) */
+.consumption-block {
+    /* Toma todas las propiedades de .transaction-block, solo necesita cambiar el orden */
+    order: -1; 
+}
+.transaction-block h4 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.1em;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.detail-row span:first-child {
+    font-weight: 500;
+}
+
+.detail-row .value {
+    font-weight: 600;
+    text-align: right;
+}
+
+.detail-row .monto {
+    color: #007bff; /* Azul para el monto */
+    font-size: 1.05em;
+}
+
+.transaction-block p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+.nota {
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+/* --- Ajustes completos para CELULARES --- */
+@media (max-width: 600px) {
+
+    /* Transacciones una debajo de otra */
+    .comprobante-body {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 15px;
+    }
+
+    .transaction-block {
+        min-width: 90%;
+        flex: 1 1 100%;
+    }
+
+    /* Modal más angosto */
+    .comprobante-content {
+        max-width: 350px;
+        width: 95%;
+        padding: 20px;
+        margin-top: 20px; /* Ajuste fino */
+    }
+
+    /* Baja el modal un poco */
+    .comprobante-modal {
+        align-items: flex-start;
+        padding-top: 60px;
+    }
+}
+/* =====================================================
+   AJUSTES CSS PARA HACER EL TOTAL ESTRECHO Y CENTRADO
+   ===================================================== */
+
+.total-container {
+    margin-top: 20px;
+    padding: 10px 15px; 
+    border: 2px solid #570000; 
+    border-radius: 8px;
+    background-color: #e8f5e9; 
+
+    /* CAMBIOS CLAVE: */
+    width: fit-content; /* El ancho se ajusta al contenido (navegadores modernos) */
+    max-width: 90%; /* Asegura que no se salga en pantallas muy pequeñas */
+    margin-left: auto; /* Centrado horizontal (funciona con margin-right: auto) */
+    margin-right: auto;
+    /* FIN DE CAMBIOS CLAVE */
+}
+
+.total-row {
+    /* Manteniendo los tamaños compactos que ya definimos */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em; 
+    font-weight: 600; 
+    color: #333;
+    /* Quitamos el espacio para que los elementos estén juntos en la etiqueta estrecha */
+    gap: 10px; 
+}
+
+.total-row span:first-child {
+    color: #000000; 
+    letter-spacing: 0.5px;
+    font-size: 0.9em;
+}
+
+.total-value {
+    font-size: 1.3em; 
+    font-weight: 700;
+     color: #007bff; /* Azul para el monto */
+    /* Eliminamos el margin-left que ya no es necesario por el 'gap' */
+    margin-left: 0; 
+}
+
+/* 1. Fondo del Modal (oscuro y semitransparente) */
+.resumen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro más intenso */
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 2. Contenido Principal del Modal */
+.resumen-content {
+    /* Usaremos un fondo degradado similar a tu body para mantener la estética oscura */
+    background: radial-gradient(circle at center, #1c1e21 0%, #000000 100%);
+    color: #f0f2f5; /* Texto principal claro */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 1px solid #333;
+}
+
+/* 3. Encabezado */
+.resumen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #38ff4f; /* Línea azul de acento */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.resumen-header h2 {
+    font-family: 'Poppins', sans-serif;
+    color: #3a8dff; /* Azul elegante */
+    margin: 0;
+}
+
+.close-resumen {
+    background: none;
+    border: none;
+    color: #f0f2f5;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-resumen:hover {
+    color: #ff6b6b; /* Rojo suave al pasar el ratón */
+}
+
+/* 4. Barra del Total Global (¡El más importante!) */
+.resumen-total-bar {
+background-color: #ffffff;
+color: black;
+padding: 8px 20px; 
+border-radius: 8px;
+margin-bottom: 25px;
+max-width: 400px; /* Mantenemos el ancho estrecho */
+margin-left: auto;
+margin-right: auto;
+display: flex;
+justify-content: space-between;
+font-weight: bold;
+font-size: 1.3em; 
+transition: transform 0.3s;
+}
+.resumen-total-bar:hover {
+    transform: translateY(-2px); /* Pequeño efecto al pasar el ratón */
+}
+
+.resumen-total-bar .total-final {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    /* 🛠️ CAMBIO CLAVE: Color azul para el monto */
+    color: #3a8dff; /* Azul que combina con el encabezado */
+
+    /* Si quieres que el monto sea un poco más grueso para destacar */
+    font-weight: 900;
+}
+
+/* 5. Detalle de Ingresos por Cuenta */
+.resumen-body h3 {
+    color: #f0f2f5;
+    margin-top: 0;
+    border-left: 4px solid #45ff38; /* Línea azul */
+    padding-left: 10px;
+}
+
+.resumen-bloque-cuenta {
+background-color: #ffffff; /* Fondo de tarjeta más claro que el fondo */
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 15px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+/* Propiedades de ancho y centrado (¡Alineadas y limpias!) */
+max-width: 90%;
+width: 600px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.resumen-cuenta-header {
+display: flex;
+justify-content: space-between;
+/* border-bottom: 1px dashed #555; <--- ¡Eliminada! */
+padding-bottom: 5px;
+margin-bottom: 10px;
+}
+
+.resumen-cuenta-header h4 {
+    color: #000000; /* Azul para el nombre de la cuenta */
+    margin: 0;
+    font-size: 1em;
+}
+
+.monto-total-cuenta {
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.1em;
+}
+
+.resumen-lista-tx {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resumen-transaccion {
+    display: flex;
+    justify-content: space-between; /* Mantiene la separación entre ubicación y monto */
+    padding: 5px 0;
+    font-size: 0.9em;
+}
+
+.resumen-transaccion span:first-child {
+color: #08454a;
+font-style: italic;
+/* 🛠️ CAMBIO CLAVE: Hace la letra más gruesa */
+font-weight: bold; 
+    /* También puedes usar un número: font-weight: 700; */
+
+flex-basis: 80%; /* Puedes jugar con este valor (ej: 50%) */
+white-space: nowrap; /* Evita que salte de línea */
+}
+
+.resumen-transaccion .monto-tx {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #3a8dff; /* Verde para los montos individuales */
+}
+
+.nota {
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+}
+/* ==========================================================
+   AJUSTES RESPONSIVOS PARA EL MODAL DE RESUMEN (< 600px)
+   ========================================================== */
+@media (max-width: 600px) {
+
+    /* 1. Contenido Principal del Modal */
+    .resumen-content {
+        padding: 20px 15px; /* Reducir el relleno interno */
+        width: 95%; /* Asegurar que ocupe casi todo el ancho disponible */
+        max-width: none; /* Ignorar el límite de 800px para maximizar el uso */
+    }
+
+    /* 2. Total Global */
+    .resumen-total-bar {
+        padding: 6px 15px; /* Reducir el relleno para hacerlo más delgado aún */
+        max-width: 90%; /* Ajustar el máximo para que encaje bien */
+        font-size: 1.1em; /* Reducir el tamaño de la fuente principal */
+    }
+
+    .resumen-total-bar .total-final {
+        font-size: 1em; /* Reducir el tamaño del monto final */
+        font-weight: 700; /* Asegurar que siga siendo visible */
+    }
+
+    /* 3. Bloques de Cuenta (Tarjetas de Transacciones) */
+    .resumen-bloque-cuenta {
+        /* Permitir que ocupe todo el ancho del contenedor */
+        max-width: 100%; 
+        width: auto; /* Dejar que el ancho sea determinado por max-width/padding */
+        margin-left: 0; 
+        margin-right: 0; 
+        padding: 10px; /* Reducir el relleno de la tarjeta */
+    }
+
+    /* 4. Encabezado de la Cuenta (Título y Total de la Cuenta) */
+    .resumen-cuenta-header {
+        /* Puede ser útil apilarlos si el nombre de la cuenta es muy largo */
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .resumen-cuenta-header h4 {
+        /* Asegurar que el nombre de la cuenta tenga espacio */
+        margin-bottom: 5px; 
+    }
+
+    /* 5. Transacciones Individuales */
+    .resumen-transaccion {
+        /* Permitir que los elementos se envuelvan si es necesario, pero mantendremos el espacio */
+        flex-wrap: nowrap;
+        padding: 5px 0;
+        font-size: 0.85em; /* Reducir ligeramente la fuente de la lista */
+    }
+
+    /* 6. Ajuste de ancho de la Ubicación [Area M-Mesa] */
+    .resumen-transaccion span:first-child {
+        /* Damos menos espacio al texto de ubicación para que el monto quepa */
+        flex-basis: 60%; 
+        font-weight: 600;
+    }
+
+    .resumen-transaccion .monto-tx {
+        /* Asegurar que el monto se mantenga grande para destacar */
+        font-size: 1.1em; 
+    }
+}
+/* --- Estilos Específicos para el Modal de Ocupación (Dashboard) --- */
+
+/* ----------------- Resumen Global (3 Columnas) ----------------- */
+.global-summary-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: #444;
+}
+
+.summary-label {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Colores de estado base (en caso de que los uses fuera de los gauges) */
+.occupied-color { color: #dc3545; /* Rojo */ }
+.libre-color { color: #28a745; /* Verde */ }
+/* Añadir el nuevo color */
+.low-occupation-color { color: #17a2b8; /* Cian/Azul */ }
+.medium-occupation-color { color: #ffc107; /* Naranja/Amarillo */ }
+
+/* ----------------- Grilla de Detalles por Área ----------------- */
+.ocupacion-grid {
+    /* Muestra los medidores en una cuadrícula flexible (responsivo) */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.area-gauge-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+
+    /* CAMBIOS AQUÍ */
+    background-color: #222; /* Fondo oscuro */
+    color: white; /* Texto blanco por defecto */
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra más oscura */
+    transition: transform 0.2s;
+}
+
+.area-gauge-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.area-gauge-block h4 {
+    margin: 0 0 10px 0;
+    color: white; /* Aseguramos que el título sea blanco */
+    font-size: 1.1em;
+}
+
+.gauge-info {
+    margin: 2px 0;
+    font-size: 0.85em;
+    color: #ccc; /* Texto de la información en gris claro */
+    text-align: center;
+}
+
+/* ----------------- Estilo del Medidor Circular (Gauge) ----------------- */
+
+.area-gauge, .total-mesas-gauge {
+    /* Define el tamaño y la forma del medidor */
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+
+    /* CAMBIO CLAVE: Círculo interior blanco (70%) cambia a color oscuro (#333) */
+    background: 
+        radial-gradient(closest-side, #333 70%, transparent 80% 100%), /* Círculo interior oscuro */
+        conic-gradient(var(--c) calc(var(--p) * 1%), #444 0); /* Fondo de progreso restante un poco más oscuro */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* El valor del porcentaje ya usa el color dinámico (var(--c)), así que estará bien */
+/* .gauge-percent-value { color: var(--c); } */
+
+
+/* Estilo para el Medidor Global (más grande) */
+.total-mesas-gauge {
+    width: 140px;
+    height: 140px;
+
+    /* CAMBIO CLAVE: Círculo interior blanco (65%) cambia a color oscuro (#333) */
+    background: 
+        radial-gradient(closest-side, #333 65%, transparent 75% 100%), /* Círculo interior oscuro */
+        conic-gradient(var(--c) calc(var(--p) * 1%), #444 0);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gauge-center-percent {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--c);
+}
+
+.gauge-center-label {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #ccc; /* Etiqueta global en gris claro */
+    margin-top: -5px;
+}
+/* --- POSICIONAMIENTO ESPECÍFICO PARA EL MODAL DE PORCENTAJES --- */
+
+.ocupacion-modal {
+    display: flex;
+    align-items: flex-start; /* Alineamos al inicio (arriba) */
+    justify-content: center;
+    padding-top: 100px;       /* Margen superior general */
+}
+
+.ocupacion-modal .resumen-content {
+    position: relative;      /* Necesario para usar top */
+    max-width: 600px;
+    max-height: 90vh;
+    top: -80px;              /* Subirlo un poco hacia arriba */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+    .ocupacion-modal .resumen-content {
+        max-width: 90%;
+        max-height: 85vh;
+        top: -100px;           /* Subirlo un poco hacia arriba */
+        transform: translateY(0);
+    }
+}
+
+
+
+/* --- Definición de la Animación de Carga del Porcentaje --- */
+@keyframes fill-gauge {
+    from {
+        /* Empezar la animación de progreso en 0% */
+        --p: 0;
+    }
+}
+
+/* --- Aplicar la Animación a los Medidores --- */
+.area-gauge, .total-mesas-gauge {
+    /* ... (otras propiedades de tamaño y fondo) ... */
+
+    /* MODIFICACIÓN CLAVE: Aumentamos la duración a 5s para hacerlo lento */
+    animation: fill-gauge 5s ease-out forwards; 
+}
+/* =====================================================
+   ESTILOS TIPO COMANDA PARA EL MODAL DE INVENTARIO
+   ===================================================== */
+
+/* 1. Contenedor Principal */
+.inventario-content {
+    /* Mantenemos altura, pero le damos un ancho más estrecho para simular un ticket */
+    max-width: 500px; 
+    max-height: 75vh;
+    margin-top: 20px;
+    padding: 20px 30px; /* Padding ajustado */
+
+    /* Fondo más uniforme para simular papel oscuro */
+    background: #121212; 
+    border: 1px dashed #444; /* Borde discontinuo para el efecto de rasgado */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+}
+
+/* 2. Encabezado */
+.resumen-header h2 {
+    /* Podemos darle una fuente que se asemeje a una impresión */
+    font-family: 'Press Start 2P', monospace; 
+    font-size: 1.1em;
+    color: #45ff38; /* Verde neón para el título de la comanda */
+}
+
+/* 3. Títulos de Sección (Tragos y Combos) */
+.inventario-titulo {
+    color: #f0f2f5; 
+    font-size: 1.1em;
+    font-weight: 400; /* No muy grueso */
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+    /* Usaremos separadores manuales en el HTML, quitamos los bordes CSS */
+    border-bottom: none; 
+    border-left: none; 
+    padding-left: 0; 
+    text-align: center; /* Centramos el título */
+}
+
+/* 4. Lista de Inventario (CON CENTRADO DEL BLOQUE) */
+.inventario-lista {
+    list-style: none;
+    padding: 0;
+
+    /* 🔑 CLAVE 1: Ancho fijo (suma de ancho de nombre + espacio + ancho de cantidad) */
+    width: 380px; 
+
+    /* 🔑 CLAVE 2: Centra el BLOQUE de 380px horizontalmente */
+    margin: 10px auto 30px auto; 
+
+    font-family: monospace; 
+    font-size: 1.4em;
+    max-width: 95%; /* Asegura que en pantallas pequeñas se ajuste */
+
+    /* Desactivamos text-align: center para que no interfiera con el flexbox */
+    text-align: right; 
+}
+/* 5. Cada Ítem (Línea de la Comanda - CON FLEXBOX) */
+.inventario-item {
+    display: flex; 
+    /* Asegura que los elementos se peguen al lado izquierdo del bloque de 380px */
+    justify-content: flex-start; 
+
+    padding: 3px 0;
+    margin-bottom: 0;
+    background-color: transparent;
+    border-bottom: none; 
+}
+
+/* 6. Estilo del Nombre (Columna Derecha Alineada) */
+.inventario-item .item-nombre {
+    font-weight: normal;
+    color: #a0a0a0;
+    font-size: 1em;
+
+    /* 🔑 CLAVE 3: Ancho fijo para columna de nombres */
+    width: 140px; 
+
+    /* 🔑 CLAVE 4: Alinea el texto a la derecha del bloque de 260px */
+    text-align: right; 
+
+    flex-shrink: 0; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    padding-right: 20px; /* Espacio fijo entre columnas */
+}
+
+/* 7. Estilo de la Cantidad (Columna Izquierda Alineada) */
+.inventario-item .item-cantidad {
+    font-weight: bold;
+    color: #3a8dff; 
+    font-size: 1em;
+
+    /* Alinea el texto a la izquierda del bloque de 100px */
+    text-align: left; 
+    width: 100px; /* Ancho fijo para columna de cantidades */
+
+    flex-shrink: 0; 
+    white-space: nowrap; 
+}
+/* Estilo del Separador de Comanda */
+.comanda-separator {
+    font-family: monospace;
+    color: #6f2525; /* Gris oscuro para las líneas */
+    text-align: center;
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+.vendido-ribbon {
+    position: absolute;
+    bottom: 5px;       /* en la parte inferior */
+    left: 50%;          /* centrado horizontalmente */
+    transform: translateX(-50%);  /* centrado exacto */
+    background: linear-gradient(45deg, #695e1b, #c59a16); /* dorado brillante */
+    color: #c7c7c7;
+    font-size: 10px;    /* pequeña */
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    z-index: 20;
+    text-align: center;
+}
+
+.img-wrapper {
+    position: relative; /* necesario para que la cinta quede sobre la imagen */
+}
+.mesa-libre {
+    font-size: 3em;
+    text-align: center;
+    margin: 50px 0;
+    color: #ff0000;
+}
+.comprobante-modal .comprobante-content {
+    width: 90%;
+    max-width: 800px; /* ancho normal para 2 o más transacciones */
+    margin: 50px auto;
+}
+
+.comprobante-modal .comprobante-content.single-transaction-modal {
+    max-width: 400px; /* ancho más corto si es 1 transacción */
+}
+/* Modal normal */
+.comprobante-modal .comprobante-content {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+/* Modal estrecho si 1 transacción */
+.comprobante-modal .comprobante-content.single-transaction-modal {
+    max-width: 400px;
+}
+
+/* Mesa libre centrado grande */
+.comprobante-modal .comprobante-content.mesa-libre {
+    max-width: 300px;
+    text-align: center;
+    font-size: 2em;
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+/* Pachamama */
+.pachamama-section {
+    border: 2px solid #FFA500;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: #FFF7E0;
+    color: #333;
+}
+
+.pachamama-section h3 { color: #FF6600; margin-bottom: 10px; }
+.pachamama-section ul { list-style: none; padding: 0; margin: 0; }
+.pachamama-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #FFA500; }
+.pachamama-item:last-child { border-bottom: none; }
+
+.detalle { color: #333; }
+.monto { font-weight: bold; color: #D84315; }
+.total-pachamama { margin-top: 10px; font-weight: bold; font-size: 16px; color: #D84315; }
+
+
+/* --- MODAL BASE --- */
+#modal-reportes {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+}
+
+#modal-reportes .modal-content {
+    background: #1c1c1e;
+    color: #f0f0f0;
+    width: 95%;
+    max-width: 600px; 
+    margin: 4vh auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
+    font-family: 'Courier New', monospace; 
+    border: 1px solid #333;
+}
+
+#modal-reportes h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: #ff5722;
+    border-bottom: 2px dashed #333;
+    padding-bottom: 12px;
+}
+
+#modal-reportes .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#modal-reportes .close-modal:hover {
+    color: #ff5252;
+}
+
+/* --- SECCIONES DE TICKET --- */
+.ticket-section {
+    background: #252527;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.ticket-section.transfer {
+    border-color: #03a9f4;
+}
+
+
+
+/* TOTAL POR CUENTA */
+.ticket-section p strong {
+    color: #8bc34a;
+    font-size: 16px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* --- ESTILOS DE ACORDEÓN --- */
+
+/* Encabezados */
+.accordion-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #ffeb3b; 
+    border-bottom: 1px solid #555;
+    margin-bottom: 0; 
+}
+
+.accordion-header:hover {
+    color: #fff;
+}
+
+/* Ícono +/- */
+.toggle-icon {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffeb3b;
+    transition: transform 0.3s;
+}
+
+/* Contenido Colapsable (AQUÍ ESTÁ LA CLAVE DEL ESPACIADO) */
+.accordion-content {
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding-top: 5px;
+    /* AÑADIDO PARA LA SEPARACIÓN VERTICAL */
+    margin-bottom: 20px; 
+}
+
+/* Lista de Transacciones (Grid de 2 columnas) */
+.ticket-grid-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+}
+
+.ticket-grid-list li {
+    background: #333;
+    padding: 6px; 
+    border-radius: 4px;
+    font-size: 12px; 
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Lista para Transferencias (Formato simple, no grid) */
+.ticket-simple-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ticket-simple-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed #555;
+    font-size: 14px;
+}
+
+/* DIVISORES */
+#modal-reportes hr {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+}
+/* 1. Contenedor principal con padding izquierdo reducido */
+.ticket-section.final {
+    background: #1a1c1e !important;
+    border-top: 4px solid #00ff88;
+    /* Reducimos el 4to valor (izquierda) a 5px para pegar todo al borde */
+    padding: 15px 15px 15px 5px !important; 
+    border-radius: 12px;
+    margin: 10px 0;
+}
+
+/* 2. Fila Única: Todo pegado a la izquierda */
+.fila-saldo {
+    display: flex !important;
+    flex-direction: row !important; /* Siempre en una línea */
+    justify-content: flex-start !important; /* Pegado al inicio izquierdo */
+    align-items: center !important;
+    gap: 8px; /* Espacio pequeño entre nombre y monto */
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 3. Nombre */
+.label-text {
+    color: #b0b0b0; 
+    font-size: 14px;
+    text-align: left !important;
+    white-space: nowrap;
+    text-transform: none; /* Quitamos mayúsculas para que quepa mejor */
+}
+
+/* 4. Monto (Pegado al texto) */
+.ticket-section.final .amount {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: left !important;
+    display: inline-block !important;
+    width: auto !important; /* Evita que ocupe toda la línea */
+}
+
+/* --- ESTILOS DE APOYO (Fórmula y Banco) --- */
+
+.formula-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.formula {
+    color: #00d4ff;
+    font-weight: bold;
+}
+
+.saldo-destacado {
+    background: #ffffff;
+    color: #000;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.monto-final {
+    font-size: 22px !important;
+    font-weight: 900;
+    color: #11783e !important;
+}
+
+.banco-detalles {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 10px;
+    font-size: 12px;
+    color: #e0e0e0;
+}
+
+.banco-detalles p {
+    margin: 4px 0 !important;
+}
+
+.ticket-section.final hr {
+    border: 0;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+    margin: 10px 0;
+}
+@media (max-width: 600px) {
+
+    /* --- 1. MODAL (Aprovechar el espacio vertical) --- */
+    #modal-reportes .modal-content {
+        /* Permite que el modal ocupe casi todo el ancho */
+        width: 98%; 
+        max-width: 90%;
+        /* Permite que el modal ocupe más altura vertical */
+        margin: 1vh auto; 
+        max-height: 87vh;
+        padding: 10px; /* Reducir padding en pantallas pequeñas */
+    }
+
+    /* --- 2. ENCABEZADOS Y TEXTO (Mejor legibilidad) --- */
+    #modal-reportes h2 {
+        font-size: 20px; /* Reducir tamaño de título principal */
+    }
+
+    .accordion-header {
+        font-size: 14px; /* Reducir tamaño de encabezados de cuenta */
+    }
+
+    /* --- 3. DETALLES DE CUENTA (Convertir a 1 columna) --- */
+    .ticket-grid-list {
+        /* Forzar la lista de detalles de mesas a 1 columna */
+        grid-template-columns: 1fr; 
+        gap: 5px; /* Reducir el espacio entre filas */
+    }
+
+    .ticket-grid-list li {
+        font-size: 13px; /* Aumentar ligeramente el tamaño del texto para que sea legible en móviles */
+        padding: 8px 10px;
+        /* Asegurar que se muestre el contenido en una sola línea por la reducción de columnas */
+        justify-content: space-between; 
+        flex-direction: row; 
+    }
+
+    /* --- 4. LISTA DE TRANSFERENCIAS (Ajuste de formato) --- */
+    .ticket-simple-list li {
+        /* Aseguramos que la información se distribuya correctamente */
+        font-size: 13px;
+        padding: 8px 0;
+    }
+
+    /* Asegurar que la referencia de la mesa y el monto original no se corten */
+    .ticket-simple-list li span:first-child {
+        word-break: break-all;
+    }
+}
+/* Acordeón Principal (El contenedor de "Reporte 12-12-25") */
+.main-report-accordion {
+    background: #333;
+    border: 2px solid #ff5722;
+    padding: 5px;
+    /* AÑADIDO: Centra el contenido del acordeón en móviles */
+    text-align: center; 
+}
+
+/* Encabezado Principal ("Reporte 12-12-25") */
+/* Debes agregar un nuevo estilo para el h3 principal que centre el texto */
+.main-report-accordion .accordion-header {
+    text-align: center; /* Centrar el texto 'Reporte 12-12-25' */
+    justify-content: center; /* Centrar los elementos internos (texto y +) */
+    gap: 15px; /* Añadir espacio entre el texto y el '+' */
+    padding: 10px 0; /* Asegurar padding uniforme */
+}
+
+/* Encabezados internos (Cuentas, Transferencias, etc.) deben mantener su justify-content: space-between */
+.inner-header {
+    justify-content: space-between; /* Mantiene el nombre a la izquierda y el + a la derecha */
+    padding: 10px 0;
+}
+.toggle-icon {
+    /* Ajusta el tamaño para que sea más grande */
+    font-size: 2em; /* Incrementado de 1.5em a 2em */
+    font-weight: bold;
+    color: #ffeb3b;
+    transition: transform 0.3s;
+    line-height: 1; /* Esto ayuda a alinear verticalmente el ícono */
+}
+/* FIX VISUAL PARA CUENTAS (mantiene diseño antiguo) */
+.ticket-grid-list li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 8px;
+}
+.ticket-grid-list li {
+    border: 1px solid #555;
+    background: #2f2f2f;
+}
+.resumen-lista-tx.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* separación entre columnas */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* Para pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+    .resumen-lista-tx.grid-3 {
+        grid-template-columns: repeat(2, 1fr); /* ahora 2 columnas */
+    }
+}
+
+.tx-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(95, 12, 12, 0.05); /* Fondo muy sutil */
+    padding: 8px 12px;
+    border-radius: 8px;
+    /* Opción más limpia con HEX (es el mismo color) */
+    border: 1px solid #05704c;
+    transition: all 0.3s ease;
+}
+
+.tx-item:hover {
+    /* Mantiene el amarillo pero se ilumina un poco */
+    background: linear-gradient(135deg, #7eceb6 0%, #7eceb6 0%);
+    /* TU BORDE VERDE NEÓN */
+    border-color: #39ff14; 
+    border-width: 2px; /* Un poco más grueso al pasar el mouse */
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.4); /* Resplandor verde */
+    transform: translateY(-2px);
+}
+.tx-item .tx-mesa {
+    color: #000000; /* Gris elegante */
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tx-item .tx-monto {
+    color: #000000;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: 700;
+}
+.separador-anio {
+    text-align: center;
+    margin: 25px 0 10px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #4caf50;
+    border-top: 2px solid #4caf50;
+    padding-top: 10px;
+}
+@media (max-width: 768px) {
+    .ticket-grid-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .ticket-grid-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    .ticket-grid-list .mesa {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70%;
+    }
+
+    .ticket-grid-list .monto {
+        font-weight: bold;
+        white-space: nowrap;
+         color: #ffffff !important;
+    }
+    }
+    /* ================= FORZAR TEXTO BLANCO EN MESAS Y MONTOS (TODAS LAS PANTALLAS) ================= */
+    .ticket-grid-list li,
+    .ticket-grid-list .mesa,
+    .ticket-grid-list .monto {
+    color: #ffffff !important;
+    }
+/* Contenedor de la lista */
+.ticket-simple-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+/* Fila de transferencia */
+.transfer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea sutil blanca */
+    gap: 10px; /* Espacio mínimo entre texto y monto */
+}
+
+/* Lado izquierdo (Mesa y detalle) */
+.transfer-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ocupa el espacio sobrante */
+}
+
+.transfer-mesa {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #FFFFFF; /* Letras blancas */
+}
+
+.transfer-detalle {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6); /* Blanco semi-transparente para que sea legible pero discreto */
+    margin-top: 2px;
+}
+
+/* Lado derecho (El monto de dinero) */
+.transfer-right {
+    text-align: right;
+    min-width: fit-content;
+}
+
+.transfer-monto {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #FFFFFF; /* Letras blancas */
+    white-space: nowrap; /* Evita que el monto se parta en dos líneas */
+    background: rgba(255, 255, 255, 0.1); /* Un pequeño fondo para resaltar el dinero */
+    padding: 4px 8px;
+    border-radius: 4px;
+}
