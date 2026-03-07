@@ -1,118 +1,349 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MESAS PACHA</title>
-    <link rel="stylesheet" href="style.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@700&family=Raleway:wght@600&family=Press+Start+2P&family=Walter+Turncoat&family=Lobster&family=Poppins:wght@600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Para Daniela 💜</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+body{
+height:100vh;
+background:linear-gradient(180deg,#8e44ad,#b57edc,#e6ccff);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:white;
+}
+
+/* titulo */
+
+.titulo{
+text-align:center;
+margin-bottom:10px;
+}
+
+.titulo h1{
+font-size:30px;
+}
+
+.titulo p{
+opacity:0.9;
+}
+
+/* ramo */
+
+.ramo{
+font-size:70px;
+animation:flotar 4s ease-in-out infinite;
+margin-bottom:10px;
+}
+
+@keyframes flotar{
+0%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+100%{transform:translateY(0)}
+}
+
+/* galeria */
+
+.galeria{
+width:90%;
+max-width:380px;
+height:420px;
+border-radius:25px;
+overflow:hidden;
+position:relative;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:opacity 1s;
+}
+
+.slide.active{
+opacity:1;
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* frase */
+
+.frase{
+position:absolute;
+bottom:0;
+width:100%;
+padding:18px;
+background:rgba(0,0,0,0.35);
+text-align:center;
+font-size:18px;
+backdrop-filter:blur(8px);
+}
+
+/* rosas */
+
+.rosa{
+position:absolute;
+font-size:20px;
+animation:caer linear infinite;
+}
+
+@keyframes caer{
+
+0%{
+transform:translateY(-10vh) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+/* brillos */
+
+.brillo{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:brillar 2s infinite alternate;
+}
+
+@keyframes brillar{
+0%{opacity:0.2;transform:scale(1)}
+100%{opacity:1;transform:scale(1.5)}
+}
+
+/* corazones */
+
+.corazon{
+position:absolute;
+font-size:25px;
+animation:subir 2s linear forwards;
+}
+
+@keyframes subir{
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-150px);
+opacity:0;
+}
+
+}
+
+/* indicadores */
+
+.indicadores{
+display:flex;
+gap:8px;
+margin-top:15px;
+}
+
+.punto{
+width:10px;
+height:10px;
+border-radius:50%;
+background:white;
+opacity:0.4;
+}
+
+.punto.activo{
+opacity:1;
+}
+
+</style>
 </head>
 
 <body>
-    <div class="sidebar" id="sidebar">
-    <a href="#" class="close-btn">&times;</a> <h3 class="menu-title">Menú</h3>
 
-        <a href="#" id="mostrar-resumen"><i class="fas fa-calculator"></i> Cuentas</a>
+<div class="ramo">💐</div>
 
-        <a href="#area-lounge"><i class="fas fa-chart-pie"></i> Porcentajes</a>
+<div class="titulo">
+<h1>Feliz Día de la Mujer</h1>
+<p>Dannis💜</p>
+</div>
 
-        <a href="#area-cholet"><i class="fas fa-clipboard-list"></i> Inventarios</a>
+<div class="galeria">
 
+<div class="slide active">
+<img src="1000691849.jpg">
+<div class="frase">Tu sonrisa tiene una forma hermosa de iluminar el mundo.</div>
+</div>
 
-        <a href="#" id="btn-reportes">
-            <i class="fas fa-file-invoice"></i> Reportes
-        </a>
-        </div>
-    <!-- Nuevo contenedor para header + imagen -->
-    <div class="custom-header-container">
-        <header class="custom-header">
-            <img class="menu-icon" id="menu-icon"
-                src="https://img.icons8.com/?size=100&id=eo4RH9bVDxml&format=png&color=000000" alt="Menu">
-        </header>
-        <img src="Gemini_Generated_Image_e6kr6be6kr6be6kr-removebg-preview.png" class="top-image" alt="Imagen encima">
-    </div>
+<div class="slide">
+<img src="1000691852.jpg">
+<div class="frase">Ser madre y mujer fuerte te hace aún más admirable.</div>
+</div>
 
-    <div class="overlay" id="overlay"></div>
+<div class="slide">
+<img src="1000691853.jpg">
+<div class="frase">El amor que das a tu hija demuestra la gran mujer que eres.</div>
+</div>
 
+<div class="slide">
+<img src="1000691859.jpg">
+<div class="frase">Hay personas especiales… y luego estás tú.</div>
+</div>
 
-    <main>
-        <div class="contenido">
+</div>
 
-            <div class="areas-container">
+<div class="indicadores">
+<div class="punto activo"></div>
+<div class="punto"></div>
+<div class="punto"></div>
+<div class="punto"></div>
+</div>
 
-                <section class="area-section" data-cantidad="10" id="area-pacha">
-                    <h2>Área Pacha</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_7k67v57k67v57k67.png" alt="Pacha">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+<audio autoplay loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-                <section class="area-section" data-cantidad="11" id="area-lounge">
-                    <h2>Área Lounge</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_m9zfqbm9zfqbm9zf.png" alt="Lounge">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+<script>
 
-                <section class="area-section" data-cantidad="12" id="area-cholet">
-                    <h2>Área Cholet</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Cholet">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+/* galeria */
 
-                <section class="area-section" data-cantidad="18" id="area-parrales">
-                    <h2>Área Parrales</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_bpjjk3bpjjk3bpjj.png" alt="Parrales">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+let slides=document.querySelectorAll(".slide")
+let puntos=document.querySelectorAll(".punto")
 
-                <section class="area-section" data-cantidad="6" id="area-vip">
-                    <h2>Área VIP</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="VIP">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+let index=0
 
-                <section class="area-section" data-cantidad="10" id="area-extra">
-                    <h2>Área Extra</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Extra">
-                    </div>
-                    <div class="area-divider"></div>
-                </section>
+function mostrarSlide(i){
 
-                <section class="area-section" data-cantidad="3" id="area-camel">
-                    <h2>Área Camel</h2>
-                    <div class="image-grid">
-                        <img src="Gemini_Generated_Image_eqsqfkeqsqfkeqsq.png" alt="Camel">
-                    </div>
+slides.forEach(s=>s.classList.remove("active"))
+puntos.forEach(p=>p.classList.remove("activo"))
 
-                </section>
+slides[i].classList.add("active")
+puntos[i].classList.add("activo")
 
-            </div>
-        </div>
-    </main>
-    <!-- MODAL REPORTES -->
-    <div id="modal-reportes" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div id="contenido-reportes"></div>
-      </div>
-    </div>
+}
 
-    <script src="script.js"></script>
+function siguiente(){
+
+index++
+
+if(index>=slides.length){
+index=0
+}
+
+mostrarSlide(index)
+
+}
+
+setInterval(siguiente,4000)
+
+/* swipe iphone */
+
+let startX=0
+
+document.querySelector(".galeria").addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX
+})
+
+document.querySelector(".galeria").addEventListener("touchend",e=>{
+
+let endX=e.changedTouches[0].clientX
+
+if(startX-endX>50){
+siguiente()
+}
+
+if(endX-startX>50){
+
+index--
+if(index<0) index=slides.length-1
+
+mostrarSlide(index)
+
+}
+
+})
+
+/* rosas cayendo */
+
+function crearRosa(){
+
+let rosa=document.createElement("div")
+
+rosa.className="rosa"
+rosa.innerHTML="🌹"
+
+rosa.style.left=Math.random()*100+"vw"
+rosa.style.animationDuration=(4+Math.random()*5)+"s"
+rosa.style.fontSize=(15+Math.random()*20)+"px"
+
+document.body.appendChild(rosa)
+
+setTimeout(()=>{
+rosa.remove()
+},9000)
+
+}
+
+setInterval(crearRosa,300)
+
+/* brillos */
+
+for(let i=0;i<40;i++){
+
+let brillo=document.createElement("div")
+brillo.className="brillo"
+
+brillo.style.left=Math.random()*100+"vw"
+brillo.style.top=Math.random()*100+"vh"
+brillo.style.animationDuration=(1+Math.random()*2)+"s"
+
+document.body.appendChild(brillo)
+
+}
+
+/* corazones al tocar */
+
+document.body.addEventListener("click",e=>{
+
+let c=document.createElement("div")
+c.className="corazon"
+c.innerHTML="💜"
+
+c.style.left=e.clientX+"px"
+c.style.top=e.clientY+"px"
+
+document.body.appendChild(c)
+
+setTimeout(()=>{
+c.remove()
+},2000)
+
+})
+
+</script>
+
 </body>
-
 </html>
