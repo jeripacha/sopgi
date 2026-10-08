@@ -1,349 +1,937 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Para Daniela 💜</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-}
-
-body{
-height:100vh;
-background:linear-gradient(180deg,#8e44ad,#b57edc,#e6ccff);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-color:white;
-}
-
-/* titulo */
-
-.titulo{
-text-align:center;
-margin-bottom:10px;
-}
-
-.titulo h1{
-font-size:30px;
-}
-
-.titulo p{
-opacity:0.9;
-}
-
-/* ramo */
-
-.ramo{
-font-size:70px;
-animation:flotar 4s ease-in-out infinite;
-margin-bottom:10px;
-}
-
-@keyframes flotar{
-0%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
-100%{transform:translateY(0)}
-}
-
-/* galeria */
-
-.galeria{
-width:90%;
-max-width:380px;
-height:420px;
-border-radius:25px;
-overflow:hidden;
-position:relative;
-box-shadow:0 20px 40px rgba(0,0,0,0.3);
-}
-
-.slide{
-position:absolute;
-width:100%;
-height:100%;
-opacity:0;
-transition:opacity 1s;
-}
-
-.slide.active{
-opacity:1;
-}
-
-.slide img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* frase */
-
-.frase{
-position:absolute;
-bottom:0;
-width:100%;
-padding:18px;
-background:rgba(0,0,0,0.35);
-text-align:center;
-font-size:18px;
-backdrop-filter:blur(8px);
-}
-
-/* rosas */
-
-.rosa{
-position:absolute;
-font-size:20px;
-animation:caer linear infinite;
-}
-
-@keyframes caer{
-
-0%{
-transform:translateY(-10vh) rotate(0deg);
-opacity:1;
-}
-
-100%{
-transform:translateY(110vh) rotate(360deg);
-opacity:0;
-}
-
-}
-
-/* brillos */
-
-.brillo{
-position:absolute;
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-opacity:0.8;
-animation:brillar 2s infinite alternate;
-}
-
-@keyframes brillar{
-0%{opacity:0.2;transform:scale(1)}
-100%{opacity:1;transform:scale(1.5)}
-}
-
-/* corazones */
-
-.corazon{
-position:absolute;
-font-size:25px;
-animation:subir 2s linear forwards;
-}
-
-@keyframes subir{
-
-0%{
-transform:translateY(0);
-opacity:1;
-}
-
-100%{
-transform:translateY(-150px);
-opacity:0;
-}
-
-}
-
-/* indicadores */
-
-.indicadores{
-display:flex;
-gap:8px;
-margin-top:15px;
-}
-
-.punto{
-width:10px;
-height:10px;
-border-radius:50%;
-background:white;
-opacity:0.4;
-}
-
-.punto.activo{
-opacity:1;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
-
 <body>
 
-<div class="ramo">💐</div>
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
 
-<div class="titulo">
-<h1>Feliz Día de la Mujer</h1>
-<p>Dannis💜</p>
-</div>
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
 
-<div class="galeria">
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
 
-<div class="slide active">
-<img src="1000691849.jpg">
-<div class="frase">Tu sonrisa tiene una forma hermosa de iluminar el mundo.</div>
-</div>
 
-<div class="slide">
-<img src="1000691852.jpg">
-<div class="frase">Ser madre y mujer fuerte te hace aún más admirable.</div>
-</div>
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
 
-<div class="slide">
-<img src="1000691853.jpg">
-<div class="frase">El amor que das a tu hija demuestra la gran mujer que eres.</div>
-</div>
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
 
-<div class="slide">
-<img src="1000691859.jpg">
-<div class="frase">Hay personas especiales… y luego estás tú.</div>
-</div>
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
 
-</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
-<div class="indicadores">
-<div class="punto activo"></div>
-<div class="punto"></div>
-<div class="punto"></div>
-<div class="punto"></div>
-</div>
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
 
-<audio autoplay loop>
-<source src="musica.mp3" type="audio/mpeg">
-</audio>
 
-<script>
+      <script src="script.js"></script>
 
-/* galeria */
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
 
-let slides=document.querySelectorAll(".slide")
-let puntos=document.querySelectorAll(".punto")
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
 
-let index=0
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
 
-function mostrarSlide(i){
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
 
-slides.forEach(s=>s.classList.remove("active"))
-puntos.forEach(p=>p.classList.remove("activo"))
 
-slides[i].classList.add("active")
-puntos[i].classList.add("activo")
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
 
-}
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
 
-function siguiente(){
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
 
-index++
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
-if(index>=slides.length){
-index=0
-}
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
 
-mostrarSlide(index)
 
-}
+      <script src="script.js"></script>
 
-setInterval(siguiente,4000)
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
 
-/* swipe iphone */
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
 
-let startX=0
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
 
-document.querySelector(".galeria").addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX
-})
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
 
-document.querySelector(".galeria").addEventListener("touchend",e=>{
 
-let endX=e.changedTouches[0].clientX
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
 
-if(startX-endX>50){
-siguiente()
-}
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
 
-if(endX-startX>50){
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
 
-index--
-if(index<0) index=slides.length-1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
-mostrarSlide(index)
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
 
-}
 
-})
+      <script src="script.js"></script>
 
-/* rosas cayendo */
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
 
-function crearRosa(){
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
 
-let rosa=document.createElement("div")
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
 
-rosa.className="rosa"
-rosa.innerHTML="🌹"
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
 
-rosa.style.left=Math.random()*100+"vw"
-rosa.style.animationDuration=(4+Math.random()*5)+"s"
-rosa.style.fontSize=(15+Math.random()*20)+"px"
 
-document.body.appendChild(rosa)
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
 
-setTimeout(()=>{
-rosa.remove()
-},9000)
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
 
-}
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
 
-setInterval(crearRosa,300)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
-/* brillos */
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
 
-for(let i=0;i<40;i++){
 
-let brillo=document.createElement("div")
-brillo.className="brillo"
+      <script src="script.js"></script>
 
-brillo.style.left=Math.random()*100+"vw"
-brillo.style.top=Math.random()*100+"vh"
-brillo.style.animationDuration=(1+Math.random()*2)+"s"
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
 
-document.body.appendChild(brillo)
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
 
-}
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
 
-/* corazones al tocar */
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
 
-document.body.addEventListener("click",e=>{
 
-let c=document.createElement("div")
-c.className="corazon"
-c.innerHTML="💜"
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
 
-c.style.left=e.clientX+"px"
-c.style.top=e.clientY+"px"
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
 
-document.body.appendChild(c)
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
 
-setTimeout(()=>{
-c.remove()
-},2000)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
-})
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
 
-</script>
+
+      <script src="script.js"></script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
+
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
+
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
+
+
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
+
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
+
+
+      <script src="script.js"></script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
+
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
+
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
+
+
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
+
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
+
+
+      <script src="script.js"></script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Caja</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
+
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">CONTROL DE CAJA</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
+
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
+
+
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
+
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" oninput="calcular(); guardarDatos();" onblur="mostrarEstadoCaja(true);">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
+
+
+      <script src="script.js"></script>
 
 </body>
 </html>
